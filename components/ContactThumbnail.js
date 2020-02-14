@@ -40,7 +40,7 @@ export default function ContactThumbnail({
 
 ContactThumbnail.propTypes = {
   name: PropTypes.string,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
   phone: PropTypes.string,
   textColor: ColorPropType,
   onPress: PropTypes.func
