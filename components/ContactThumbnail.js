@@ -15,7 +15,7 @@ import colors from "../utils/colors";
 export default function ContactThumbnail({
   name,
   phone,
-  avtar,
+  avatar,
   textColor,
   onPress
 }) {
