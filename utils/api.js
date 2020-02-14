@@ -21,6 +21,7 @@ export const fetchContacts = async () => {
     "https://randomuser.me/api/?results=100&seed=fullstackio"
   );
   const contactData = await response.json();
+  // console.log(contactData);
 
   return contactData.results.map(mapContact);
 };

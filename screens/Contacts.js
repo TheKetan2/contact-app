@@ -15,7 +15,7 @@ const keyExtractor = ({ phone }) => phone;
 
 export default class Contacts extends React.Component {
   state = {
-    contact: [],
+    contacts: [],
     loading: true,
     error: false
   };
@@ -23,27 +23,35 @@ export default class Contacts extends React.Component {
   async componentDidMount() {
     try {
       const contacts = await fetchContacts();
-      this.setState({ contacts, loading: flase, error: flase });
+      this.setState({
+        contacts,
+        loading: false,
+        error: false
+      });
     } catch (e) {
-      this.setState({ loading: flase, error: true });
+      this.setState({
+        loading: false,
+        error: true
+      });
     }
   }
+
   renderContact = ({ item }) => {
     const { name, avatar, phone } = item;
     return <ContactListItem name={name} avatar={avatar} phone={phone} />;
   };
+
   render() {
     const { loading, contacts, error } = this.state;
-    const contactsSorted = contacts.sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
+
+    const contactSorted = contacts.sort((a, b) => a.name.localeCompare(b.name));
     return (
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
         {error && <Text>Error...</Text>}
         {!loading && !error && (
           <FlatList
-            data={contactsSorted}
+            data={contactSorted}
             keyExtractor={keyExtractor}
             renderItem={this.renderContact}
           />
