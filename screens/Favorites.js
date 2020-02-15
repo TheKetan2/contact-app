@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import { fetchContacts } from "../utils/api";
+
 import ContactThumbnail from "../components/ContactThumbnail";
 
 const keyExtractor = ({ phone }) => phone;
@@ -27,7 +28,11 @@ export default class Favorites extends React.Component {
     try {
       const contacts = await fetchContacts();
 
-      this.setState({ contacts, loading: false, error: false });
+      this.setState({
+        contacts,
+        loading: false,
+        error: false
+      });
     } catch (e) {
       this.setState({
         loading: false,
@@ -37,8 +42,11 @@ export default class Favorites extends React.Component {
   }
 
   renderFavoriteThumbnail = ({ item }) => {
-    const { navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
     const { avatar } = item;
+
     return (
       <ContactThumbnail
         avatar={avatar}
@@ -50,7 +58,7 @@ export default class Favorites extends React.Component {
   render() {
     const { loading, contacts, error } = this.state;
     const favorites = contacts.filter(contact => contact.favorite);
-    console.log(this.state);
+
     return (
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
