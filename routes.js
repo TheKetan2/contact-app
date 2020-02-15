@@ -2,7 +2,7 @@ import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import ViewPagerAdapter from "react-native-tab-view-viewpager-adapter";
+import { createDrawerNavigator } from "react-navigation-drawer";
 // import { StackNavigator, TabNavigator } from "react-navigation";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -13,6 +13,9 @@ import User from "./screens/User";
 
 import colors from "./utils/colors";
 
+const getDrawerItemIcon = icon => ({ tintColor }) => (
+  <MaterialIcons name={icon} size={22} style={{ color: tintColor }} />
+);
 const getTabBarIcon = icon => ({ tintColor }) => (
   <MaterialIcons name={icon} size={26} style={{ color: tintColor }} />
 );
@@ -29,7 +32,8 @@ const ContactScreens = createStackNavigator(
   {
     initialRouteName: "Contacts",
     navigationOptions: {
-      tabBarIcon: getTabBarIcon("list")
+      tabBarIcon: getTabBarIcon("list"),
+      drawerIcon: getDrawerItemIcon("list")
     }
   }
 );
@@ -46,7 +50,8 @@ const FavoriteScreens = createStackNavigator(
   {
     initialRouteName: "Favorites",
     navigationOptions: {
-      tabBarIcon: getTabBarIcon("star")
+      tabBarIcon: getTabBarIcon("star"),
+      drawerIcon: getDrawerItemIcon("star")
     }
   }
 );
@@ -58,12 +63,13 @@ const UserScreens = createStackNavigator(
   {
     initialRouteName: "User",
     navigationOptions: {
-      tabBarIcon: getTabBarIcon("person")
+      tabBarIcon: getTabBarIcon("person"),
+      drawerIcon: getDrawerItemIcon("person")
     }
   }
 );
 
-const bottomTapNavigator = createBottomTabNavigator(
+const DrawerToggle = createDrawerNavigator(
   {
     Contacts: ContactScreens,
 
@@ -86,7 +92,7 @@ const bottomTapNavigator = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(bottomTapNavigator);
+export default createAppContainer(DrawerToggle);
 
 // const ContactsScreens = StackNavigator(
 //   {
