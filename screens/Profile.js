@@ -8,8 +8,14 @@ import { fetchRandomContact } from "../utils/api";
 import colors from "../utils/colors";
 
 export default class Profile extends Component {
-  state = {
-    contact: {}
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.state.params.contact.name.split(" ")[0],
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: colors.blue
+      }
+    };
   };
 
   async componentDidMount() {
@@ -18,7 +24,15 @@ export default class Profile extends Component {
   }
 
   render() {
-    const { avatar, name, email, phone, cell } = this.state.contact;
+    const {
+      navigation: {
+        state: { params }
+      }
+    } = this.props;
+    console.log(this.props);
+    const { contact } = params;
+    // const { contact } = this.props.navigation.state.params;
+    const { avatar, name, email, phone, cell } = contact;
 
     return (
       <View style={styles.container}>
