@@ -34,19 +34,55 @@ const ContactScreens = createStackNavigator(
   }
 );
 
+const FavoriteScreens = createStackNavigator(
+  {
+    Favorites: {
+      screen: Favorites
+    },
+    Profile: {
+      screen: Profile
+    }
+  },
+  {
+    initialRouteName: "Favorites",
+    navigationOptions: {
+      tabBarIcon: getTabBarIcon("star")
+    }
+  }
+);
+
+const UserScreens = createStackNavigator(
+  {
+    User: { screen: User }
+  },
+  {
+    initialRouteName: "User",
+    navigationOptions: {
+      tabBarIcon: getTabBarIcon("person")
+    }
+  }
+);
+
 const bottomTapNavigator = createBottomTabNavigator(
   {
     Contacts: ContactScreens,
 
-    User: {
-      screen: User
-    },
-    Favorites: {
-      screen: Favorites
-    }
+    User: UserScreens,
+    Favorites: FavoriteScreens
   },
   {
-    initialRouteName: "Contacts"
+    initialRouteName: "Contacts",
+    tabBarPosition: "bottom",
+    tabBarOptions: {
+      style: {
+        backgroundColor: colors.greyLight
+      },
+      showLabel: false,
+      showIcon: true,
+      activeTintColor: colors.blue,
+      inactiveTintColor: colors.greyDark,
+      renderIndicator: () => null
+    }
   }
 );
 

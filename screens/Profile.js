@@ -9,16 +9,19 @@ import colors from "../utils/colors";
 
 export default class Profile extends Component {
   // render() {
-  //   console.log(this.props.navigation.state.params.contact.name);
+  //   console.log(this.props);
   //   return (
   //     <View>
   //       <Text>Hi</Text>
   //     </View>
   //   );
   // }
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
+    console.log(navigation);
+
     return {
-      title: this.props.navigation.state.params.contact.name.split(" ")[0],
+      title: navigation.state.params.contact.name.split(" ")[0],
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: colors.blue

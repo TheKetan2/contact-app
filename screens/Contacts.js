@@ -52,7 +52,9 @@ export default class Contacts extends React.Component {
         name={name}
         avatar={avatar}
         phone={phone}
-        onPress={() => navigate("Profile", { contact: item })}
+        onPress={() =>
+          this.props.navigation.navigate("Profile", { contact: item })
+        }
       />
     );
   };
